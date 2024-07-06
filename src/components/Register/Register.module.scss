@@ -36,12 +36,20 @@
 
 .back_button {
     margin: 20px 0;
-  }
 
-    .back_button a {
+    a {
         text-decoration: none;
         color: black;
+        display: flex; 
+        align-items: center; 
+        
+    
+        svg {
+            margin-right: 5px;
+            vertical-align: middle;
+        }
     }
+}
 
 .text {
     font-size: 32px;
@@ -68,10 +76,14 @@
     outline: none;
 }
 
-.error {
-    color: red;
+.field.error {
+    border-color: red;
+  }
+
+.password_match {
     font-size: 14px;
-    margin: 5px 0;
+    margin: 2px 2px;
+    color: red;
 
 }
 
@@ -102,8 +114,37 @@ height: auto;
 
 h1 {
 margin: 10px 0;
+text-align: center;
+font-size: 48px;
+font-weight: 500;
 }
 
 p {
-margin: 0;
+font-size: 28px;
+font-weight: 400;
+text-align: center;
+}
+
+
+.passwordField {
+    position: relative;
+  }
+  
+.passwordInput {
+    display: flex;
+    align-items: center;
+}
+
+.passwordInput input {
+    flex: 1;
+}
+
+.passwordInput svg {
+    margin-left: -35px;
+    cursor: pointer;
+}
+
+.password_errors {
+    font-size: 14px;
+    margin: 5px 20px;
 }
