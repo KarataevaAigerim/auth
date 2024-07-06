@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
-import Home from './components/Home';
+import Home from './components/Home/Home';
 import { ToastContainer } from 'react-toastify';
 import './App.scss';
 
