@@ -30,7 +30,7 @@ const Login = () => {
     <div className={style.login_page}>
       <div className={style.left}>
         <div>
-            <img src={lorby} alt="lorby" />
+            <img src={lorby} alt="lorby" className={style.login_img}/>
         </div>
         <div>
             <h1>Lorby</h1>

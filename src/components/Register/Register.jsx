@@ -37,7 +37,7 @@ const Register = () => {
       <div className={style.content}>
         <div className={style.left}>
           <div>
-              <img src={lorby} alt="lorby" />
+              <img src={lorby} alt="lorby"  className={style.register_img}/>
           </div>
           <div>
               <h1>Lorby</h1>
