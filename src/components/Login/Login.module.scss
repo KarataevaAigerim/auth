@@ -106,3 +106,21 @@ img {
         color: rgba(41, 41, 41, 1);
     }
 }
+
+.passwordField {
+    position: relative;
+  }
+  
+.passwordInput {
+    display: flex;
+    align-items: center;
+}
+
+.passwordInput input {
+    flex: 1;
+}
+
+.passwordInput svg {
+    margin-left: -35px;
+    cursor: pointer;
+}

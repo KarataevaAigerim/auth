@@ -1,5 +1,5 @@
-import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import React, { useState } from 'react';
+import { Formik, Form, Field } from 'formik';
 import { useDispatch } from 'react-redux';
 import { login } from '../../features/auth/authSlice';
 import { loginSchema } from '../../utils/validation';
@@ -7,10 +7,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import style from './Login.module.scss';
 import lorby from '../../styles/svg/lorby.svg';
+import { ReactComponent as OpenEye } from '../../styles/svg/open-eye.svg';
+import { ReactComponent as ShutEye } from '../../styles/svg/shut-eye.svg';
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
@@ -51,13 +54,22 @@ const Login = () => {
                 className={style.input}
                 />
               </div>
-              <div>
-                <Field 
-                type="password" 
-                name="password" 
-                placeholder='Enter your password'
-                className={style.input}
-                />
+              <div className={style.passwordField}>
+                <div className={style.passwordInput}>
+                  <Field 
+                  type={passwordVisible ? 'text' : 'password'}
+                  name="password" 
+                  placeholder='Enter your password'
+                  className={style.input}
+                  />
+                  <span onClick={() => setPasswordVisible(!passwordVisible)}>
+                    {passwordVisible ? (
+                      <ShutEye width="24" height="24" />
+                    ) : (
+                      <OpenEye width="24" height="24" />
+                    )}
+                  </span>
+                </div>
               </div>
               <div>
                 <button 
