@@ -7,6 +7,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import lorby from '../../styles/svg/lorby.svg';
 import style from './Register.module.scss';
+import { ReactComponent as OpenEye } from '../../styles/svg/open-eye.svg';
+import { ReactComponent as ShutEye } from '../../styles/svg/shut-eye.svg';
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -25,82 +27,88 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <div>
-        <Link to="/login">Go back to login</Link>
+    <div className={style.register_page}>
+      <div className={style.back_button}>
+        <Link to="/login">Back</Link>
       </div>
-      <div className={style.left}>
-        <div>
-            <img src={lorby} alt="lorby" />
+      <div className={style.content}>
+        <div className={style.left}>
+          <div>
+              <img src={lorby} alt="lorby" />
+          </div>
+          <div>
+              <h1>Lorby</h1>
+              <p>Your personal tutor</p>
+          </div>
         </div>
-        <div>
-            <h1>Lorby</h1>
-            <p>Your personal tutor</p>
+        <div className={style.right}> 
+          <h2 className={style.text}>Create an account Lorby</h2>
+          <Formik
+              initialValues={{ email: '', username: '', password: '', confirmPassword: '' }}
+              validationSchema={registrationSchema}
+              onSubmit={handleSubmit}
+          >
+              {({ isSubmitting, values }) => (
+              <Form>
+                  <div>
+                  <Field type="email" name="email" placeholder='Enter your email'  className={style.field}/>
+                  <ErrorMessage name="email" component="div" className={style.error} />
+                  </div>
+                  <div>
+                  <Field type="text" name="username" placeholder='Choose username' className={style.field}/>
+                  <ErrorMessage name="username" component="div" className={style.error} />
+                  </div>
+                  <div>
+                  <Field type={passwordVisible ? "text" : "password"} name="password" placeholder='Create a password' className={style.field}/>
+                  <span onClick={() => setPasswordVisible(!passwordVisible)}>
+                      {passwordVisible ? (
+                        <ShutEye width="24" height="24" />
+                      ) : (
+                        <OpenEye width="24" height="24" />
+                      )}
+                    </span>
+                  <ErrorMessage name="password" component="div" className={style.error}/>
+                  </div>
+                  <div>
+                  
+                  <Field type={passwordVisible ? "text" : "password"} name="confirmPassword" placeholder='Confirm your password' className={style.field}/>
+                  <ErrorMessage name="confirmPassword" component="div" className={style.error}/>
+                  </div>
+                  <div>
+                  <button type="button" onClick={() => setPasswordVisible(!passwordVisible)}>
+                      {passwordVisible ? 'Hide' : 'Show'} Password
+                  </button>
+                  </div>
+                  <div>
+                  <button type="submit" disabled={isSubmitting} className={style.sbm_btn}>
+                      Register
+                  </button>
+                  </div>
+                  <div>
+                  {values.password && (
+                      <ul>
+                      <li style={{ color: /[A-Z]/.test(values.password) ? 'green' : 'red' }}>
+                          At least one uppercase letter
+                      </li>
+                      <li style={{ color: /[a-z]/.test(values.password) ? 'green' : 'red' }}>
+                          At least one lowercase letter
+                      </li>
+                      <li style={{ color: /[0-9]/.test(values.password) ? 'green' : 'red' }}>
+                          At least one number
+                      </li>
+                      <li style={{ color: /[!@#$%^&*(),.?":{}|<>]/.test(values.password) ? 'green' : 'red' }}>
+                          At least one special character
+                      </li>
+                      <li style={{ color: values.password.length >= 8 && values.password.length <= 15 ? 'green' : 'red' }}>
+                          8-15 characters long
+                      </li>
+                      </ul>
+                  )}
+                  </div>
+              </Form>
+              )}
+          </Formik>
         </div>
-      </div>
-      <div>
-        <h3>Create an account Lorby</h3>
-        <Formik
-            initialValues={{ email: '', username: '', password: '', confirmPassword: '' }}
-            validationSchema={registrationSchema}
-            onSubmit={handleSubmit}
-        >
-            {({ isSubmitting, values }) => (
-            <Form>
-                <div>
-                <label>Email</label>
-                <Field type="email" name="email" />
-                <ErrorMessage name="email" component="div" />
-                </div>
-                <div>
-                <label>Username</label>
-                <Field type="text" name="username" />
-                <ErrorMessage name="username" component="div" />
-                </div>
-                <div>
-                <label>Password</label>
-                <Field type={passwordVisible ? "text" : "password"} name="password" />
-                <ErrorMessage name="password" component="div" />
-                </div>
-                <div>
-                <label>Confirm Password</label>
-                <Field type={passwordVisible ? "text" : "password"} name="confirmPassword" />
-                <ErrorMessage name="confirmPassword" component="div" />
-                </div>
-                <div>
-                <button type="button" onClick={() => setPasswordVisible(!passwordVisible)}>
-                    {passwordVisible ? 'Hide' : 'Show'} Password
-                </button>
-                </div>
-                <div>
-                <button type="submit" disabled={isSubmitting}>
-                    Register
-                </button>
-                </div>
-                <div>
-                {values.password && (
-                    <ul>
-                    <li style={{ color: /[A-Z]/.test(values.password) ? 'green' : 'red' }}>
-                        At least one uppercase letter
-                    </li>
-                    <li style={{ color: /[a-z]/.test(values.password) ? 'green' : 'red' }}>
-                        At least one lowercase letter
-                    </li>
-                    <li style={{ color: /[0-9]/.test(values.password) ? 'green' : 'red' }}>
-                        At least one number
-                    </li>
-                    <li style={{ color: /[!@#$%^&*(),.?":{}|<>]/.test(values.password) ? 'green' : 'red' }}>
-                        At least one special character
-                    </li>
-                    <li style={{ color: values.password.length >= 8 && values.password.length <= 15 ? 'green' : 'red' }}>
-                        8-15 characters long
-                    </li>
-                    </ul>
-                )}
-                </div>
-            </Form>
-            )}
-        </Formik>
       </div>
     </div>
   );

@@ -6,10 +6,10 @@ export const loginSchema = Yup.object().shape({
 });
 
 export const registrationSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email address').required('Required'),
-  username: Yup.string().required('Required'),
+  email: Yup.string().email('Invalid email address').required('required'),
+  username: Yup.string().required('required'),
   password: Yup.string()
-    .required('Required')
+    .required('required')
     .min(8, 'Password is too short - should be 8 chars minimum.')
     .max(15, 'Password is too long - should be 15 chars maximum.')
     .matches(/[A-Z]/, 'Password must contain an uppercase letter.')
@@ -18,5 +18,5 @@ export const registrationSchema = Yup.object().shape({
     .matches(/[!@#$%^&*(),.?":{}|<>]/, 'Password must contain a special character.'),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Passwords must match')
-    .required('Required'),
+    .required('required'),
 });
