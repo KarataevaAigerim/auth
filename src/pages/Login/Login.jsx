@@ -29,8 +29,8 @@ const Login = () => {
   return (
     <div className={style.login_page}>
       <div className={style.left}>
-        <div>
-            <img src={lorby} alt="lorby" className={style.login_img}/>
+        <div className={style.login_img}>
+            <img src={lorby} alt="lorby"/>
         </div>
         <div>
             <h1>Lorby</h1>

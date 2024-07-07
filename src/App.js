@@ -1,8 +1,8 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Login from './components/Login/Login';
-import Register from './components/Register/Register';
-import Home from './components/Home/Home';
+import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
+import Home from './pages/Home/Home';
 import { ToastContainer } from 'react-toastify';
 import './App.scss';
 

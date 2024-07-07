@@ -36,10 +36,10 @@ const Register = () => {
       </div>
       <div className={style.content}>
         <div className={style.left}>
-          <div>
-              <img src={lorby} alt="lorby"  className={style.register_img}/>
+          <div className={style.register_img}>
+              <img src={lorby} alt="lorby"/>
           </div>
-          <div>
+          <div className={style.heading}>
               <h1>Lorby</h1>
               <p>Your personal tutor</p>
           </div>
@@ -51,8 +51,8 @@ const Register = () => {
               validationSchema={registrationSchema}
               onSubmit={handleSubmit}
           >
-              {({ isSubmitting, errors, touched, values }) => (
-              <Form>
+              {({ isSubmitting, isValid, errors, touched, values }) => (
+              <Form className= {style.register_form}>
                   <div>
                     <Field 
                     type="email" 
@@ -126,7 +126,7 @@ const Register = () => {
                     <ErrorMessage name="confirmPassword" component="div" className={style.password_match}/>
                   </div>
                   <div>
-                    <button type="submit" disabled={isSubmitting} className={style.sbm_btn}>
+                    <button type="submit" disabled={!isValid || isSubmitting} className={style.sbm_btn}>
                         Register
                     </button>
                   </div>
