@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
 export const loginSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email address').required('Required'),
+  username: Yup.string().required('Required'),
   password: Yup.string().required('Required'),
 });
 
@@ -16,7 +16,7 @@ export const registrationSchema = Yup.object().shape({
     .matches(/[a-z]/, 'Password must contain a lowercase letter.')
     .matches(/[0-9]/, 'Password must contain a number.')
     .matches(/[!@#$%^&*(),.?":{}|<>]/, 'Password must contain a special character.'),
-  confirmPassword: Yup.string()
+    password_confirm: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Passwords must match')
     .required('required'),
 });

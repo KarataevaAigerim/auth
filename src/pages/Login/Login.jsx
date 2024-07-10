@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
-import { useDispatch } from 'react-redux';
-import { login } from '../../features/auth/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, clearError } from '../../features/auth/authSlice';
 import { loginSchema } from '../../utils/validation';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -14,14 +14,18 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const error = useSelector((state) => state.auth.error);
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
+      if (error) {
+        dispatch(clearError());
+      }
       await dispatch(login(values)).unwrap();
       toast.success('Login successful!');
       navigate('/home');
     } catch (err) {
-      toast.error('Login failed!');
+      toast.error('Login failed! ' + (err.message || 'Please try again.'));
       setSubmitting(false);
     }
   };
@@ -30,37 +34,37 @@ const Login = () => {
     <div className={style.login_page}>
       <div className={style.left}>
         <div className={style.login_img}>
-            <img src={lorby} alt="lorby"/>
+          <img src={lorby} alt="lorby" />
         </div>
         <div>
-            <h1>Lorby</h1>
-            <p>Your personal tutor</p>
+          <h1>Lorby</h1>
+          <p>Your personal tutor</p>
         </div>
       </div>
-      <div className={style.right}> 
+      <div className={style.right}>
         <h2 className={style.text}>Welcome back!</h2>
         <Formik
-          initialValues={{ email: '', password: '' }}
+          initialValues={{ username: '', password: '' }}
           validationSchema={loginSchema}
           onSubmit={handleSubmit}
         >
           {({ isSubmitting }) => (
             <Form>
               <div>
-                <Field 
-                type="email"
-                name="email" 
-                placeholder='Enter your email'
-                className={style.input}
+                <Field
+                  type="username"
+                  name="username"
+                  placeholder="Enter your username"
+                  className={style.input}
                 />
               </div>
               <div className={style.passwordField}>
                 <div className={style.passwordInput}>
-                  <Field 
-                  type={passwordVisible ? 'text' : 'password'}
-                  name="password" 
-                  placeholder='Enter your password'
-                  className={style.input}
+                  <Field
+                    type={passwordVisible ? 'text' : 'password'}
+                    name="password"
+                    placeholder="Enter your password"
+                    className={style.input}
                   />
                   <span onClick={() => setPasswordVisible(!passwordVisible)}>
                     {passwordVisible ? (
@@ -72,10 +76,10 @@ const Login = () => {
                 </div>
               </div>
               <div>
-                <button 
-                type="submit" 
-                disabled={isSubmitting}
-                className={style.login_btn}
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className={style.login_btn}
                 >
                   Login
                 </button>
@@ -83,9 +87,9 @@ const Login = () => {
             </Form>
           )}
         </Formik>
-      <div className={style.register_link}>
-        <Link to="/register">I don't have an account</Link>
-      </div>
+        <div className={style.register_link}>
+          <Link to="/register">I don't have an account</Link>
+        </div>
       </div>
     </div>
   );

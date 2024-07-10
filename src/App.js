@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Home from './pages/Home/Home';
+import Confirm from './components/Confirm/Confirm';
 import { ToastContainer } from 'react-toastify';
 import './App.scss';
 
@@ -14,6 +15,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/confirm" element={<Confirm />} />
       </Routes>
       <ToastContainer />
     </div>
@@ -21,3 +23,6 @@ function App() {
 }
 
 export default App;
+
+
+
