@@ -6,6 +6,7 @@ import Home from './pages/Home/Home';
 import Confirm from './components/Confirm/Confirm';
 import { ToastContainer } from 'react-toastify';
 import './App.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

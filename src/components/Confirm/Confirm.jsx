@@ -5,12 +5,15 @@ import { useNavigate, Link } from 'react-router-dom';
 import style from './Confirm.module.scss';
 import lorby from '../../styles/svg/lorby.svg';
 import { ReactComponent as ArrowIcon } from '../../styles/svg/arrow.svg';
+import ResendModal from '../ResendModal/ResendModal';
 
 const Confirm = () => {
   const [code, setCode] = useState('');
+  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { confirmationStatus, confirmationError } = useSelector((state) => state.auth);
+
 
   useEffect(() => {
     if (confirmationStatus === 'succeeded') {
@@ -24,8 +27,12 @@ const Confirm = () => {
   };
 
   const handleResendEmail = () => {
-    dispatch(resendConfirmationCode());
+    dispatch(resendConfirmationCode()).then(() => {
+      setShowModal(true); // Show the modal after resending email
+    });
   };
+
+  const handleCloseModal = () => setShowModal(false);
 
   return (
     <div className={style.confirm_page}>
@@ -62,7 +69,9 @@ const Confirm = () => {
                         <button type="submit" className={style.confirmBtn}>Confirm Email</button>
                     </form>
                     <div className={style.resend}>
-                        <button onClick={handleResendEmail} className={style.resendBtn}>I didn't get the email</button>
+                    <button variant="primary" className={style.resendBtn} onClick={handleResendEmail}>
+                        I didn't get the email
+                    </button>
                     </div>
                     
                     {confirmationStatus === 'loading' && <p>Loading...</p>}
@@ -72,6 +81,7 @@ const Confirm = () => {
             </div>
                 
       </div>
+      <ResendModal show={showModal} handleClose={handleCloseModal} />
     </div>
   );
 };
