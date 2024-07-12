@@ -71,3 +71,50 @@
     font-size: 20px;
     color: rgba(118, 118, 118, 1);
   }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .resendBtn {
+    background: none;
+    font-size: 16px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    text-align: center;
+
+    a {
+        text-decoration: none;
+        color: rgba(41, 41, 41, 1);
+    }
+  }
+
+  .input {
+    border: 1px solid rgba(118, 118, 118, 1);
+    padding: 10px;
+    margin: 10px 0;
+    outline: none;
+    border-radius: 15px;
+  }
+
+  .confirmBtn {
+    background-color: rgba(41, 41, 41, 1);
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    margin: 10px 0;
+  }
+
+  .resend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+  }

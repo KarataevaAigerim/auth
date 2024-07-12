@@ -51,17 +51,18 @@ const Confirm = () => {
                     </p>
                     <p className={style.confirmError}> If you haven't received it, do not panic - please check your <strong>spam folder</strong>.</p>
                     <p className={style.emoji}>(´｡• ω •｡`)</p>
-                    <form onSubmit={handleConfirmEmail}>
+                    <form onSubmit={handleConfirmEmail} className={style.form}>
                         <input
                         type="text"
+                        className={style.input}
                         value={code}
                         onChange={(e) => setCode(e.target.value)}
                         placeholder="Enter confirmation code"
                         required />
-                        <button type="submit">Confirm Email</button>
+                        <button type="submit" className={style.confirmBtn}>Confirm Email</button>
                     </form>
-                    <div>
-                        <button onClick={handleResendEmail}>I didn't get the email</button>
+                    <div className={style.resend}>
+                        <button onClick={handleResendEmail} className={style.resendBtn}>I didn't get the email</button>
                     </div>
                     
                     {confirmationStatus === 'loading' && <p>Loading...</p>}
