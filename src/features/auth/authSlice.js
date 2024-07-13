@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import authService from '../services/authService';
 
+
 const initialState = {
   user: null,
   status: 'idle',
@@ -100,3 +101,4 @@ const authSlice = createSlice({
 export const { clearError, clearConfirmationError } = authSlice.actions;
 
 export default authSlice.reducer;
+

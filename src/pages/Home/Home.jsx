@@ -1,4 +1,5 @@
-import React from 'react';
+// import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../features/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +15,10 @@ const Home = () => {
     dispatch(logout());
     navigate('/');
   };
+
+  useEffect(() => {
+    console.log('User:', user); // Debugging line to check user object
+  }, [user]);
 
   return (
     <div className={style.home_page}>
